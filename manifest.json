@@ -1,0 +1,26 @@
+{
+  "name": "Aspira — Zihin & Gelişim",
+  "short_name": "Aspira",
+  "description": "Günlük motivasyon, alışkanlık takibi ve hatırlatıcı",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#040308",
+  "theme_color": "#040308",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "logo192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
