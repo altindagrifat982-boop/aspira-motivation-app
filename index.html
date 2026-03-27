@@ -12,8 +12,7 @@
 <link rel="manifest" href="manifest.json"/>
 <link rel="icon" type="image/png" sizes="192x192" href="logo192.png"/>
 <link rel="apple-touch-icon" href="logo512.png"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet"/>
+<!-- Fonts: system stack only — no external requests for full privacy -->
 <style>
 :root{
   --sat:env(safe-area-inset-top,0px);
@@ -22,7 +21,7 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
 html{height:100%;height:-webkit-fill-available}
 body{
-  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue','Inter',Arial,sans-serif;
   background:#040308;color:#fff;
   position:fixed;width:100%;height:100%;height:-webkit-fill-available;
   overflow:hidden;top:0;left:0;right:0;bottom:0;
@@ -81,7 +80,7 @@ body{
 }
 @keyframes obFloat{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.04)}}
 .ob-logo-text{
-  font-family:'Cormorant Garamond',serif;
+  font-family:'Georgia','Times New Roman',serif;
   font-size:44px;font-weight:300;letter-spacing:7px;
   background:linear-gradient(135deg,#fff 30%,rgba(255,255,255,.55) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
@@ -98,7 +97,7 @@ body{
   -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
   border:1.5px solid rgba(255,255,255,.15);
   border-radius:20px;
-  font-family:'Inter',-apple-system,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
   font-size:18px;font-weight:600;
   color:#fff;text-align:center;outline:none;
   -webkit-appearance:none;appearance:none;
@@ -149,7 +148,7 @@ body{
   width:100%;padding:17px;border-radius:20px;border:none;cursor:pointer;
   background:linear-gradient(135deg,#c050ff,#7020d0);
   color:#fff;font-size:16px;font-weight:800;
-  font-family:'Inter',-apple-system,sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
   touch-action:manipulation;letter-spacing:.2px;
   box-shadow:0 6px 28px rgba(180,40,255,.45),0 1.5px 0 rgba(255,255,255,.22) inset;
   transition:all .25s cubic-bezier(.34,1.56,.64,1);
@@ -159,7 +158,7 @@ body{
 .ob-skip{
   margin-top:12px;background:none;border:none;cursor:pointer;
   font-size:13px;color:rgba(255,255,255,.3);touch-action:manipulation;
-  font-family:'Inter',-apple-system,sans-serif;padding:4px;
+  font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;padding:4px;
 }
 
 /* feature grid on step 1 */
@@ -171,7 +170,7 @@ body{
 /* ══════════════════════════════════════════════
    MAIN APP
 ══════════════════════════════════════════════ */
-.shell{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2;max-width:430px;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;padding-top:var(--sat);padding-bottom:var(--sab)}
+.shell{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2;max-width:430px;margin:0 auto;display:flex;flex-direction:column;overflow:hidden;padding-top:var(--sat)}
 
 /* header */
 .hdr{flex-shrink:0;padding:14px 22px 0}
@@ -199,13 +198,25 @@ body{
 .card{background:rgba(255,255,255,.08);-webkit-backdrop-filter:blur(40px) saturate(200%) brightness(1.08);backdrop-filter:blur(40px) saturate(200%) brightness(1.08);border-radius:22px;border:1px solid rgba(255,255,255,.13);box-shadow:0 1.5px 0 rgba(255,255,255,.18) inset,0 -1px 0 rgba(0,0,0,.2) inset,0 12px 40px rgba(0,0,0,.45);margin-bottom:12px;position:relative;overflow:hidden}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);pointer-events:none}
 
-.scr{flex:1;overflow-y:auto;overflow-x:hidden;padding:12px 16px 16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.scr{flex:1;overflow-y:auto;overflow-x:hidden;padding:12px 16px calc(80px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .scr::-webkit-scrollbar{display:none}
 
 /* bottom nav */
-.bbar{flex-shrink:0;background:rgba(4,3,8,.88);-webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);border-top:1px solid rgba(255,255,255,.08);padding:8px 8px 10px}
+.bbar{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  z-index:100;
+  background:rgba(4,3,8,.95);
+  -webkit-backdrop-filter:blur(30px) saturate(180%);
+  backdrop-filter:blur(30px) saturate(180%);
+  border-top:1px solid rgba(255,255,255,.1);
+  padding:8px 8px 0;
+  padding-bottom:max(12px,env(safe-area-inset-bottom));
+  max-width:430px;
+  margin:0 auto;
+}
 .bnav{display:flex;gap:3px}
-.nb{flex:1;padding:9px 2px 7px;border:none;background:transparent;font-family:'Inter',-apple-system,sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.28);cursor:pointer;border-radius:16px;transition:color .2s,background .2s;letter-spacing:.5px;text-transform:uppercase;touch-action:manipulation}
+.nb{flex:1;padding:7px 1px 6px;border:none;background:transparent;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-size:8px;font-weight:700;color:rgba(255,255,255,.28);cursor:pointer;border-radius:16px;transition:color .2s,background .2s;letter-spacing:.5px;text-transform:uppercase;touch-action:manipulation}
 .nb .ni{font-size:18px;display:block;margin-bottom:3px;transition:transform .28s cubic-bezier(.34,1.56,.64,1)}
 .nb.active{background:rgba(255,255,255,.94);color:#040308;border-radius:18px}
 .nb.active .ni{transform:scale(1.1) translateY(-2px)}
@@ -233,7 +244,7 @@ body{
 .ch-xp{font-size:12px;font-weight:700;color:#ffd700;margin-left:auto}
 .ch-title{font-size:14px;font-weight:600}
 .ch-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.5;margin-bottom:12px}
-.ch-btn{width:100%;padding:11px;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,rgba(255,160,0,.3),rgba(255,80,0,.25));border:1px solid rgba(255,140,0,.3);color:#ffaa00;font-size:14px;font-weight:700;font-family:'Inter',-apple-system,sans-serif;touch-action:manipulation;transition:all .2s}
+.ch-btn{width:100%;padding:11px;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,rgba(255,160,0,.3),rgba(255,80,0,.25));border:1px solid rgba(255,140,0,.3);color:#ffaa00;font-size:14px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;touch-action:manipulation;transition:all .2s}
 .ch-btn:active{transform:scale(.97)}
 .ch-btn.done{background:rgba(80,220,120,.15);border-color:rgba(80,220,120,.3);color:rgba(80,220,120,.9)}
 
@@ -286,7 +297,7 @@ body{
 .task-del{width:24px;height:24px;border-radius:8px;flex-shrink:0;background:rgba(255,80,80,.1);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:rgba(255,100,100,.45);transition:all .18s;touch-action:manipulation;opacity:0}
 .task:hover .task-del,.task:active .task-del{opacity:1}
 .add-row{background:rgba(255,255,255,.05);border:1.5px dashed rgba(255,255,255,.12);border-radius:16px;padding:13px 15px;display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.add-inp{flex:1;background:transparent;border:none;outline:none;font-family:'Inter',-apple-system,sans-serif;font-size:16px;color:rgba(255,255,255,.6)}
+.add-inp{flex:1;background:transparent;border:none;outline:none;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-size:16px;color:rgba(255,255,255,.6)}
 .add-inp::placeholder{color:rgba(255,255,255,.25)}
 .add-plus{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);border:none;cursor:pointer;font-size:18px;color:rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;touch-action:manipulation;flex-shrink:0}
 
@@ -334,7 +345,7 @@ body{
 .shield-info{flex:1}
 .shield-label{font-size:12px;font-weight:600;color:rgba(255,255,255,.7)}
 .shield-sub{font-size:11px;color:rgba(255,255,255,.35);margin-top:1px}
-.shield-btn{padding:6px 14px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;font-family:'Inter',-apple-system,sans-serif;touch-action:manipulation;transition:all .2s}
+.shield-btn{padding:6px 14px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;touch-action:manipulation;transition:all .2s}
 .shield-btn.available{background:linear-gradient(135deg,#a060ff,#6030d0);color:#fff;box-shadow:0 0 12px rgba(140,60,255,.4)}
 .shield-btn.used{background:rgba(255,255,255,.08);color:rgba(255,255,255,.35)}
 .anlz-title{font-size:15px;font-weight:600;margin:16px 0 10px;color:rgba(255,255,255,.85)}
@@ -352,7 +363,7 @@ body{
 .hstreak-val{font-weight:700;color:rgba(255,255,255,.85)}
 
 /* notes */
-.zinput{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:15px;font-family:'Inter',-apple-system,sans-serif;font-size:16px;color:#fff;resize:none;outline:none;min-height:86px;margin-bottom:12px;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.zinput{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:15px;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-size:16px;color:#fff;resize:none;outline:none;min-height:86px;margin-bottom:12px;transition:border-color .2s;-webkit-appearance:none;appearance:none}
 .zinput:focus{border-color:rgba(180,80,255,.45)}
 .zinput::placeholder{color:rgba(255,255,255,.28)}
 .note-empty{display:flex;flex-direction:column;align-items:center;padding:48px 20px;gap:12px;color:rgba(255,255,255,.22)}
@@ -383,7 +394,7 @@ body{
 .tarrow{font-size:11px;color:rgba(255,255,255,.35)}
 .thi{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;-webkit-appearance:none;font-size:16px}
 .dchips{display:flex;gap:6px;flex-wrap:wrap}
-.dchip{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);font-size:13px;font-weight:700;color:rgba(255,255,255,.4);cursor:pointer;touch-action:manipulation;font-family:'Inter',-apple-system,sans-serif;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.dchip{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);font-size:13px;font-weight:700;color:rgba(255,255,255,.4);cursor:pointer;touch-action:manipulation;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .dchip.on{background:rgba(255,255,255,.92);color:#040308;border-color:transparent}
 .saved-title{font-size:15px;font-weight:600;margin:16px 0 10px;color:rgba(255,255,255,.85)}
 .saved-empty{padding:26px 0;text-align:center;font-size:14px;color:rgba(255,255,255,.25)}
@@ -396,9 +407,9 @@ body{
 .hinfo{flex:1;min-width:0}
 .hname{font-size:15px;font-weight:600}
 .hinputs{display:flex;align-items:center;gap:6px;margin-top:7px;flex-wrap:wrap}
-.hnum{width:72px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:7px;font-size:16px;font-weight:600;color:#fff;font-family:'Inter',-apple-system,sans-serif;outline:none;text-align:center;-webkit-appearance:none;appearance:none;transition:border-color .2s}
+.hnum{width:72px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:7px;font-size:16px;font-weight:600;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;outline:none;text-align:center;-webkit-appearance:none;appearance:none;transition:border-color .2s}
 .hnum:focus{border-color:rgba(180,80,255,.5)}
-.htgt{width:72px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:7px;font-size:16px;color:rgba(255,255,255,.45);font-family:'Inter',-apple-system,sans-serif;outline:none;text-align:center;-webkit-appearance:none;appearance:none;transition:border-color .2s}
+.htgt{width:72px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:7px;font-size:16px;color:rgba(255,255,255,.45);font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;outline:none;text-align:center;-webkit-appearance:none;appearance:none;transition:border-color .2s}
 .htgt:focus{border-color:rgba(180,80,255,.5)}
 .hslash{font-size:14px;color:rgba(255,255,255,.3)}
 .hunit{font-size:12px;color:rgba(255,255,255,.28);margin-left:2px}
@@ -413,7 +424,7 @@ body{
 .add-htxt{font-size:14px;color:rgba(255,255,255,.38)}
 .plus-c{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:20px;color:rgba(255,255,255,.5)}
 .add-hform{display:none;margin-bottom:10px}
-.finput{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px;font-size:16px;color:#fff;font-family:'Inter',-apple-system,sans-serif;outline:none;margin-bottom:8px;-webkit-appearance:none;appearance:none;transition:border-color .2s}
+.finput{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 14px;font-size:16px;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;outline:none;margin-bottom:8px;-webkit-appearance:none;appearance:none;transition:border-color .2s}
 .finput:focus{border-color:rgba(180,80,255,.5)}
 .finput::placeholder{color:rgba(255,255,255,.28)}
 .frow{display:flex;gap:8px;align-items:center}
@@ -468,8 +479,8 @@ body{
 .chain-warn-streak-lbl{font-size:12px;color:rgba(255,255,255,.35);margin-bottom:20px;letter-spacing:.5px}
 .chain-warn-sub{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:20px}
 .chain-warn-btns{display:flex;gap:10px}
-.chain-btn-shield{flex:1;padding:13px;border-radius:16px;border:none;cursor:pointer;background:linear-gradient(135deg,#a060ff,#6030d0);color:#fff;font-size:14px;font-weight:700;font-family:'Inter',-apple-system,sans-serif;touch-action:manipulation;box-shadow:0 0 16px rgba(140,60,255,.4)}
-.chain-btn-dismiss{padding:13px 18px;border-radius:16px;border:none;cursor:pointer;background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);font-size:14px;font-weight:600;font-family:'Inter',-apple-system,sans-serif;touch-action:manipulation}
+.chain-btn-shield{flex:1;padding:13px;border-radius:16px;border:none;cursor:pointer;background:linear-gradient(135deg,#a060ff,#6030d0);color:#fff;font-size:14px;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;touch-action:manipulation;box-shadow:0 0 16px rgba(140,60,255,.4)}
+.chain-btn-dismiss{padding:13px 18px;border-radius:16px;border:none;cursor:pointer;background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);font-size:14px;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;touch-action:manipulation}
 
 /* level up */
 .levelup-overlay{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);opacity:0;pointer-events:none;transition:opacity .4s}
@@ -481,7 +492,7 @@ body{
 .lu-title{font-size:12px;font-weight:700;letter-spacing:2px;color:rgba(255,210,0,.7);margin:14px 0 4px;text-transform:uppercase}
 .lu-level{font-size:36px;font-weight:700;background:linear-gradient(135deg,#ffd700,#ff8c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .lu-sub{font-size:14px;color:rgba(255,255,255,.5);margin-top:6px}
-.lu-btn{margin-top:20px;padding:12px 32px;border-radius:50px;border:none;background:linear-gradient(135deg,#ffd700,#ff8c00);color:#000;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',-apple-system,sans-serif;touch-action:manipulation}
+.lu-btn{margin-top:20px;padding:12px 32px;border-radius:50px;border:none;background:linear-gradient(135deg,#ffd700,#ff8c00);color:#000;font-size:14px;font-weight:700;cursor:pointer;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;touch-action:manipulation}
 
 /* emoji modal */
 .emodal{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s ease}
@@ -492,7 +503,7 @@ body{
 .esheet-title{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:12px;font-weight:600}
 .ecats{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;scrollbar-width:none;padding-bottom:2px}
 .ecats::-webkit-scrollbar{display:none}
-.ecat{flex-shrink:0;padding:6px 14px;border-radius:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:12px;font-weight:600;color:rgba(255,255,255,.5);cursor:pointer;touch-action:manipulation;font-family:'Inter',-apple-system,sans-serif;transition:all .2s;-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+.ecat{flex-shrink:0;padding:6px 14px;border-radius:20px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:12px;font-weight:600;color:rgba(255,255,255,.5);cursor:pointer;touch-action:manipulation;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;transition:all .2s;-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
 .ecat.active{background:rgba(255,255,255,.92);color:#040308;border-color:transparent;box-shadow:0 0 14px rgba(255,255,255,.2)}
 .egrid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;max-height:210px;overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .egrid::-webkit-scrollbar{display:none}
@@ -500,6 +511,75 @@ body{
 .ep::before{content:'';position:absolute;top:0;left:0;right:0;height:40%;background:linear-gradient(to bottom,rgba(255,255,255,.12),transparent);border-radius:14px 14px 0 0;pointer-events:none}
 .ep:active{transform:scale(.84)}
 .ep.sel{background:linear-gradient(135deg,rgba(190,80,255,.5),rgba(255,60,120,.4));border-color:rgba(200,100,255,.5);box-shadow:0 0 0 2px rgba(200,100,255,.4),0 2px 8px rgba(0,0,0,.3)}
+
+/* ── Force dark mode always — prevent system light theme washing out text ── */
+:root{color-scheme:dark}
+
+/* Fallback: if somehow rendered on light background, ensure readability */
+@media(prefers-color-scheme:light){
+  html,body{background:#040308 !important}
+  .shell,#glcanvas{background:transparent}
+  /* text stays white */
+  body,div,span,p,button,input,textarea{
+    color-scheme:dark;
+  }
+}
+
+
+/* ══════════════════════════════════════════════
+   AYARLAR (SETTINGS) PAGE
+══════════════════════════════════════════════ */
+.settings-section{font-size:11px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,.3);margin:18px 0 8px;padding:0 2px}
+.settings-row{display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);border-radius:16px;margin-bottom:8px;cursor:pointer;touch-action:manipulation;transition:background .18s;-webkit-user-select:none;user-select:none}
+.settings-row:active{background:rgba(255,255,255,.13)}
+.settings-icon{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.settings-info{flex:1;min-width:0}
+.settings-label{font-size:15px;font-weight:600;color:#fff}
+.settings-sub{font-size:12px;color:rgba(255,255,255,.35);margin-top:2px}
+.settings-arrow{font-size:12px;color:rgba(255,255,255,.25);flex-shrink:0}
+.settings-version{text-align:center;font-size:12px;color:rgba(255,255,255,.2);padding:20px 0 8px}
+
+/* Premium card */
+.premium-card{
+  background:linear-gradient(135deg,rgba(200,80,255,.2),rgba(255,60,120,.15));
+  border:1px solid rgba(200,80,255,.35);
+  border-radius:22px;padding:20px;margin-bottom:12px;
+  position:relative;overflow:hidden;
+}
+.premium-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,80,255,.5),transparent)}
+.premium-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#ffd700,#ff8c00);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:800;color:#000;letter-spacing:.5px;margin-bottom:12px}
+.premium-title{font-size:20px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
+.premium-sub{font-size:13px;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:16px}
+.premium-features{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.premium-feat{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.8)}
+.premium-feat-icon{font-size:16px;width:24px;text-align:center}
+.premium-plans{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.plan-card{padding:14px;border-radius:16px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.12);text-align:center;cursor:pointer;touch-action:manipulation;transition:all .2s;position:relative}
+.plan-card.popular{background:rgba(200,80,255,.2);border-color:rgba(200,80,255,.5)}
+.plan-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#c050ff,#8030d0);border-radius:20px;padding:2px 10px;font-size:10px;font-weight:700;white-space:nowrap}
+.plan-period{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:4px}
+.plan-price{font-size:22px;font-weight:800;margin-bottom:2px}
+.plan-price span{font-size:12px;font-weight:400;color:rgba(255,255,255,.4)}
+.plan-save{font-size:11px;color:#ffd700;font-weight:600}
+.premium-cta{width:100%;padding:15px;border-radius:16px;border:none;cursor:pointer;background:linear-gradient(135deg,#c050ff,#8030d0);color:#fff;font-size:15px;font-weight:800;font-family:inherit;touch-action:manipulation;box-shadow:0 4px 20px rgba(180,40,255,.4);letter-spacing:.2px}
+.premium-cta:active{transform:scale(.98)}
+.premium-note{font-size:11px;color:rgba(255,255,255,.25);text-align:center;margin-top:10px;line-height:1.5}
+
+/* Danger zone */
+.danger-btn{width:100%;padding:14px;border-radius:16px;border:1px solid rgba(255,60,60,.3);background:rgba(255,60,60,.08);color:rgba(255,100,100,.8);font-size:14px;font-weight:600;cursor:pointer;touch-action:manipulation;font-family:inherit;margin-bottom:8px;transition:all .2s}
+.danger-btn:active{background:rgba(255,60,60,.2)}
+
+/* Confirm dialog */
+.confirm-dialog{position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.7);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .3s}
+.confirm-dialog.show{opacity:1;pointer-events:all}
+.confirm-card{width:100%;max-width:340px;background:rgba(20,10,35,.97);border:1px solid rgba(255,60,60,.3);border-radius:24px;padding:28px 24px 20px;text-align:center;transform:scale(.88) translateY(16px);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.confirm-dialog.show .confirm-card{transform:scale(1) translateY(0)}
+.confirm-em{font-size:44px;display:block;margin-bottom:14px}
+.confirm-title{font-size:18px;font-weight:700;margin-bottom:8px}
+.confirm-sub{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:20px}
+.confirm-btns{display:flex;gap:10px}
+.confirm-yes{flex:1;padding:13px;border-radius:14px;border:none;cursor:pointer;background:linear-gradient(135deg,#ff3333,#cc0000);color:#fff;font-size:14px;font-weight:700;font-family:inherit;touch-action:manipulation}
+.confirm-no{padding:13px 18px;border-radius:14px;border:none;cursor:pointer;background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);font-size:14px;font-weight:600;font-family:inherit;touch-action:manipulation}
 
 #toastbar{position:fixed;bottom:calc(82px + var(--sab));left:50%;transform:translateX(-50%) translateY(12px);background:rgba(18,12,30,.96);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:10px 20px;font-size:13px;font-weight:500;color:#fff;opacity:0;transition:opacity .28s,transform .28s;pointer-events:none;z-index:400;white-space:nowrap;-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
 </style>
@@ -747,7 +827,115 @@ body{
         </div>
         <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,.3);margin-bottom:8px">AKTİF GÜNLER</div>
         <div class="dchips" id="dchips"></div>
+
+      <!-- Gizlilik & Yasal -->
+      <div class="rv" style="margin-top:8px;padding:14px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:18px;display:flex;align-items:center;justify-content:space-between">
+        <div style="font-size:12px;color:rgba(255,255,255,.3)">Gizlilik & Kullanım Koşulları</div>
+        <button id="privacyBtn" style="background:none;border:none;font-size:12px;color:rgba(255,255,255,.4);cursor:pointer;touch-action:manipulation;font-family:inherit;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.08)">Görüntüle</button>
       </div>
+    </div>
+
+    <!-- AYARLAR -->
+    <div class="page" id="page-ayarlar">
+
+      <!-- Premium card -->
+      <div class="premium-card">
+        <div class="premium-badge">✦ PREMİUM</div>
+        <div class="premium-title">Aspira Pro'ya Yükselt</div>
+        <div class="premium-sub">Tüm özelliklerin kilidini aç, sınırsız büyü.</div>
+        <div class="premium-features">
+          <div class="premium-feat"><span class="premium-feat-icon">🛡️</span>Sınırsız Seri Kalkanı</div>
+          <div class="premium-feat"><span class="premium-feat-icon">⚡</span>2x XP Hızlandırıcı</div>
+          <div class="premium-feat"><span class="premium-feat-icon">🎨</span>Özel Temalar & Renkler</div>
+          <div class="premium-feat"><span class="premium-feat-icon">📊</span>Detaylı İstatistikler</div>
+          <div class="premium-feat"><span class="premium-feat-icon">🔔</span>Akıllı Hatırlatıcılar</div>
+          <div class="premium-feat"><span class="premium-feat-icon">☁️</span>Bulut Yedekleme (Yakında)</div>
+        </div>
+        <div class="premium-plans">
+          <div class="plan-card" data-plan="monthly">
+            <div class="plan-period">Aylık</div>
+            <div class="plan-price">49 <span>TL/ay</span></div>
+            <div class="plan-save">&nbsp;</div>
+          </div>
+          <div class="plan-card popular" data-plan="yearly">
+            <div class="plan-badge">EN İYİ DEĞER</div>
+            <div class="plan-period">Yıllık</div>
+            <div class="plan-price">299 <span>TL/yıl</span></div>
+            <div class="plan-save">%49 tasarruf</div>
+          </div>
+        </div>
+        <button class="premium-cta" id="premiumBtn">Şimdi Başla — 7 Gün Ücretsiz</button>
+        <div class="premium-note">İstediğin zaman iptal edebilirsin. Deneme sonunda ücret alınır.<br>Aboneliği Google Play / App Store üzerinden yönetebilirsin.</div>
+      </div>
+
+      <!-- Profil -->
+      <div class="settings-section">PROFİL</div>
+      <div class="settings-row" id="settingsNameRow">
+        <div class="settings-icon" style="background:linear-gradient(135deg,rgba(200,80,255,.25),rgba(255,60,120,.2))">👤</div>
+        <div class="settings-info">
+          <div class="settings-label">Kullanıcı Adı</div>
+          <div class="settings-sub" id="settingsNameSub">—</div>
+        </div>
+        <div class="settings-arrow">›</div>
+      </div>
+
+      <!-- Bildirimler -->
+      <div class="settings-section">BİLDİRİMLER</div>
+      <div class="settings-row">
+        <div class="settings-icon" style="background:linear-gradient(135deg,rgba(255,150,0,.25),rgba(255,80,0,.2))">🔔</div>
+        <div class="settings-info">
+          <div class="settings-label">Günlük Motivasyon</div>
+          <div class="settings-sub" id="settingsNotifSub">Kapalı</div>
+        </div>
+        <button class="toggle" id="settingsNtog" style="flex-shrink:0"></button>
+      </div>
+      <div class="settings-row" id="settingsTimeRow">
+        <div class="settings-icon" style="background:linear-gradient(135deg,rgba(60,180,255,.2),rgba(40,120,255,.15))">⏰</div>
+        <div class="settings-info">
+          <div class="settings-label">Bildirim Saati</div>
+          <div class="settings-sub" id="settingsTimeSub">08:00</div>
+        </div>
+        <div style="position:relative">
+          <div class="settings-arrow">›</div>
+          <input type="time" id="settingsTinp" style="position:absolute;inset:0;opacity:0;cursor:pointer;font-size:16px;-webkit-appearance:none;width:60px"/>
+        </div>
+      </div>
+
+      <!-- Yasal -->
+      <div class="settings-section">GİZLİLİK & YASAL</div>
+      <div class="settings-row" id="privacyRow">
+        <div class="settings-icon" style="background:linear-gradient(135deg,rgba(80,220,120,.2),rgba(40,180,80,.15))">🔒</div>
+        <div class="settings-info">
+          <div class="settings-label">Gizlilik Politikası</div>
+          <div class="settings-sub">GDPR & KVKK Uyumlu</div>
+        </div>
+        <div class="settings-arrow">›</div>
+      </div>
+      <div class="settings-row" id="termsRow">
+        <div class="settings-icon" style="background:linear-gradient(135deg,rgba(100,150,255,.2),rgba(60,100,255,.15))">📋</div>
+        <div class="settings-info">
+          <div class="settings-label">Kullanım Koşulları</div>
+          <div class="settings-sub">Son güncelleme: Mart 2025</div>
+        </div>
+        <div class="settings-arrow">›</div>
+      </div>
+
+      <!-- Uygulama -->
+      <div class="settings-section">UYGULAMA</div>
+      <div class="settings-row">
+        <div class="settings-icon" style="background:rgba(255,255,255,.06)">ℹ️</div>
+        <div class="settings-info">
+          <div class="settings-label">Versiyon</div>
+          <div class="settings-sub">1.0.0 — Aspira</div>
+        </div>
+      </div>
+
+      <!-- Tehlikeli bölge -->
+      <div class="settings-section" style="color:rgba(255,80,80,.5)">VERİ YÖNETİMİ</div>
+      <button class="danger-btn" id="deleteDataBtn">🗑 Tüm Verilerimi Sil</button>
+
+      <div class="settings-version">Aspira v1.0 · Tüm veriler cihazınızda saklanır<br>Hiçbir veri sunucularımıza gönderilmez</div>
+
     </div>
 
   </div>
@@ -764,6 +952,7 @@ body{
       <button class="nb" data-page="takvim"><span class="ni">🗓</span>TAKVİM</button>
       <button class="nb" data-page="notlar"><span class="ni">📄</span>NOTLAR</button>
       <button class="nb" data-page="hedef"><span class="ni">◎</span>HEDEF</button>
+      <button class="nb" data-page="ayarlar"><span class="ni">⚙️</span>AYARLAR</button>
     </nav>
   </div>
 </div>
@@ -806,6 +995,109 @@ body{
     <div class="egrid" id="egrid"></div>
   </div>
 </div>
+
+
+<!-- ════ PRIVACY MODAL — GDPR/KVKK Uyumlu ════ -->
+<div id="privacyModal" style="position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.75);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s">
+  <div id="privacySheet" style="width:100%;max-width:430px;background:rgba(10,6,20,.98);border-radius:28px 28px 0 0;border-top:1px solid rgba(255,255,255,.12);padding:20px 22px calc(28px + env(safe-area-inset-bottom));max-height:88vh;overflow-y:auto;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)">
+    <div style="width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.2);margin:0 auto 20px"></div>
+    <div style="font-size:21px;font-weight:700;margin-bottom:4px">🔒 Gizlilik Politikası</div>
+    <div style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:22px">Geçerlilik tarihi: 1 Mart 2025 · GDPR & KVKK Uyumlu</div>
+
+    <div style="background:rgba(80,220,120,.1);border:1px solid rgba(80,220,120,.25);border-radius:14px;padding:14px;margin-bottom:20px;font-size:13px;color:rgba(120,220,140,.9);line-height:1.6">
+      ✅ <strong>Kısa Özet:</strong> Aspira hiçbir kişisel verinizi toplamaz, işlemez veya üçüncü taraflarla paylaşmaz. Tüm verileriniz yalnızca kendi cihazınızda saklanır.
+    </div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">1. VERİ SORUMLUSU</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">Aspira uygulaması bağımsız bir geliştirici tarafından sunulmaktadır. İletişim için uygulama mağazası sayfamızı ziyaret ediniz.</div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">2. TOPLANAN VERİLER</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">
+      <strong style="color:#fff">Aspira hiçbir kişisel veri toplamaz.</strong> Uygulama içinde girdiğiniz bilgiler (kullanıcı adı, görevler, notlar, ruh hali kayıtları) yalnızca cihazınızın yerel depolama alanında (localStorage) saklanır. Bu veriler sunucularımıza iletilmez, buluta yüklenmez, bizimle paylaşılmaz.<br><br>
+      Saklanan veriler:<br>
+      • Kullanıcı adı (yalnızca cihazda)<br>
+      • Günlük görev ve alışkanlık verileri<br>
+      • Ruh hali kayıtları<br>
+      • Notlar ve hedefler<br>
+      • XP, seri ve başarı bilgileri<br>
+      • Bildirim zaman tercihleri
+    </div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">3. ÜÇÜNCÜ TARAF HİZMETLER</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">Aspira herhangi bir analitik, reklam, izleme veya üçüncü taraf veri işleme servisi kullanmaz. Google Fonts veya benzeri dış kaynak yüklenmez.</div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">4. BİLDİRİMLER</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">Bildirim izninizi yalnızca günlük motivasyon hatırlatıcıları için kullanırız. İzin vermezseniz uygulama tam olarak çalışmaya devam eder. Ayarlardan istediğiniz zaman kapatabilirsiniz.</div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">5. HAKLARINIZ (GDPR & KVKK)</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">
+      Kişisel veri işlemediğimizden aşağıdaki haklar doğrudan uygulanabilir:<br>
+      • <strong style="color:#fff">Erişim hakkı:</strong> Tüm verileriniz cihazınızda, uygulama içinden görülebilir<br>
+      • <strong style="color:#fff">Silme hakkı:</strong> "Tüm Verilerimi Sil" butonu ile anında silebilirsiniz<br>
+      • <strong style="color:#fff">Taşınabilirlik:</strong> Verileriniz size aittir, sunucumuzda kopyası yoktur
+    </div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">6. ÇOCUKLARIN GİZLİLİĞİ</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">Aspira 13 yaş ve üzeri kullanıcılar içindir. 13 yaş altı kullanıcılardan bilerek veri toplamıyoruz. Veri toplamadığımızdan bu kural otomatik olarak karşılanmaktadır.</div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">7. GÜNCELLEMELEacuteR</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:24px">Bu politika değiştiğinde uygulama içinde bildirim yapılacaktır. Güncel politika her zaman bu sayfada erişilebilir olacaktır.</div>
+
+    <button id="privacyClose" style="width:100%;padding:14px;border-radius:16px;border:none;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;touch-action:manipulation">Kapat</button>
+  </div>
+</div>
+
+<!-- ════ TERMS MODAL ════ -->
+<div id="termsModal" style="position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.75);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s">
+  <div id="termsSheet" style="width:100%;max-width:430px;background:rgba(10,6,20,.98);border-radius:28px 28px 0 0;border-top:1px solid rgba(255,255,255,.12);padding:20px 22px calc(28px + env(safe-area-inset-bottom));max-height:88vh;overflow-y:auto;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)">
+    <div style="width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.2);margin:0 auto 20px"></div>
+    <div style="font-size:21px;font-weight:700;margin-bottom:4px">📋 Kullanım Koşulları</div>
+    <div style="font-size:11px;color:rgba(255,255,255,.3);margin-bottom:22px">Son güncelleme: 1 Mart 2025</div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">1. KABUL</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">Aspira uygulamasını kullanarak bu koşulları kabul etmiş sayılırsınız. Kabul etmiyorsanız uygulamayı kullanmayınız.</div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">2. HİZMET TANIMI</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">Aspira, kişisel gelişim, motivasyon ve alışkanlık takibi amaçlı bir mobil uygulamadır. Tıbbi, psikolojik veya profesyonel tavsiye sunmaz.</div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">3. KULLANICI SORUMLULUĞU</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">Uygulama 13 yaş ve üzeri içindir. Uygulamayı yasalara aykırı amaçlarla kullanamazsınız. Cihazınızdaki verilerinizin güvenliğinden siz sorumlusunuz.</div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">4. PRO ABONELİK (Yakında)</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">
+      Ücretli abonelik özellikleri henüz aktif değildir. Aktif olduğunda:<br>
+      • Abonelikler Google Play / App Store üzerinden yönetilir<br>
+      • İptal için ilgili mağaza ayarlarını kullanabilirsiniz<br>
+      • Deneme süresi bitmeden iptal ederseniz ücret alınmaz<br>
+      • Geri ödeme talepleri mağaza politikalarına tabidir
+    </div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">5. FİKRİ MÜLKİYET</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">Uygulama tasarımı, içeriği ve kodu geliştiriciye aittir. İzinsiz kopyalanamaz, dağıtılamaz.</div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">6. SORUMLULUK REDDİ</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px">Uygulama "olduğu gibi" sunulmaktadır. Veri kaybından, cihaz uyumsuzluğundan veya hizmet kesintisinden doğacak zararlardan sorumlu değiliz.</div>
+
+    <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;margin-bottom:8px">7. UYGULANACAK HUKUK</div>
+    <div style="font-size:14px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:24px">Bu koşullar Türkiye Cumhuriyeti yasalarına tabidir. Uyuşmazlıklarda Türkiye mahkemeleri yetkilidir.</div>
+
+    <button id="termsClose" style="width:100%;padding:14px;border-radius:16px;border:none;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;touch-action:manipulation">Kapat</button>
+  </div>
+</div>
+
+<!-- ════ CONFIRM DELETE DIALOG ════ -->
+<div class="confirm-dialog" id="confirmDelete">
+  <div class="confirm-card">
+    <span class="confirm-em">⚠️</span>
+    <div class="confirm-title">Tüm Verileri Sil?</div>
+    <div class="confirm-sub">Görevlerin, notların, serilerin ve tüm ilerleme bilgilerin kalıcı olarak silinecek. Bu işlem geri alınamaz.</div>
+    <div class="confirm-btns">
+      <button class="confirm-yes" id="confirmDeleteYes">Evet, Sil</button>
+      <button class="confirm-no" id="confirmDeleteNo">Vazgeç</button>
+    </div>
+  </div>
+</div>
+
 
 <div id="toastbar"></div>
 
@@ -1296,8 +1588,8 @@ function buildEmojiSheet(){
 function openEmojiPicker(idx){eTarget=idx;activeCat=0;buildEmojiSheet();document.getElementById('emodal').classList.add('open');}
 
 /* ── Nav ── */
-const PT={bugun:null,seri:'Başarı Serisi',takvim:'Takvim',notlar:'Zihin Defteri',hedef:'Hedef Yönetimi'};
-const RENDERS={bugun:renderTasks,seri:renderSeri,takvim:renderCalendar,notlar:renderNotes,hedef:renderHedef};
+const PT={bugun:null,seri:'Başarı Serisi',takvim:'Takvim',notlar:'Zihin Defteri',hedef:'Hedef Yönetimi',ayarlar:'Ayarlar'};
+const RENDERS={bugun:renderTasks,seri:renderSeri,takvim:renderCalendar,notlar:renderNotes,hedef:renderHedef,ayarlar:renderAyarlar};
 function setPT(id){
   const a=document.getElementById('pta'),t=PT[id];if(!t){a.innerHTML='';return;}
   if(id==='hedef')a.innerHTML=`<div class="pt-row"><div class="pt">${t}</div><button class="ico-btn" id="ptaAddBtn">+</button></div>`;
@@ -1309,11 +1601,17 @@ function goPage(id){
   document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   document.querySelector(`.nb[data-page="${id}"]`).classList.add('active');
-  setPT(id);RENDERS[id]?.();
-  requestAnimationFrame(()=>requestAnimationFrame(revealCards));
+  setPT(id);
+  RENDERS[id]?.();
+  // Reveal cards after render completes
+  requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(revealCards)));
   document.getElementById('scr').scrollTop=0;
 }
-function revealCards(){document.querySelectorAll('.page.active .rv:not(.vis)').forEach((el,i)=>setTimeout(()=>el.classList.add('vis'),i*70));}
+function revealCards(){
+  document.querySelectorAll('.page.active .rv:not(.vis)').forEach((el,i)=>{
+    setTimeout(()=>el.classList.add('vis'),i*55);
+  });
+}
 
 /* ── Toast ── */
 let tt=null;
@@ -1441,11 +1739,29 @@ document.addEventListener('click',function(e){
   if(t.id==='warnShieldBtn'){shieldFromWarning();return;}
   if(t.id==='warnDismissBtn'){dismissChainWarning();return;}
   if(t.id==='chainWarning'){dismissChainWarning();return;}
+  if(t.id==='privacyBtn'||t.id==='privacyRow'){openPrivacy();return;}
+  if(t.id==='privacyClose'||t.id==='privacyModal'){closePrivacy();return;}
+  if(t.id==='termsRow'){openTerms();return;}
+  if(t.id==='termsClose'||t.id==='termsModal'){closeTerms();return;}
+  if(t.id==='deleteDataBtn'){showDeleteConfirm();return;}
+  if(t.id==='confirmDeleteYes'){deleteAllData();return;}
+  if(t.id==='confirmDeleteNo'||t.id==='confirmDelete'){hideDeleteConfirm();return;}
+  if(t.id==='premiumBtn'){handlePremium();return;}
+  const planCard=t.closest('.plan-card');if(planCard){selectPlan(planCard.dataset.plan);return;}
+  if(t.id==='settingsNameRow'||t.closest('#settingsNameRow')){
+    const ob=document.getElementById('onboard');const inp=document.getElementById('nameInput');
+    const btn=document.getElementById('step1Btn');
+    inp.value=S.userName||'';btn.disabled=false;
+    btn.textContent=S.userName?'Güncelle →':'Başla →';
+    ob.classList.remove('hidden');obGoTo(0);return;
+  }
+  if(t.id==='settingsNtog'){toggleNotif();setTimeout(renderAyarlar,300);return;}
 });
 
 document.addEventListener('change',function(e){
   const t=e.target;
   if(t.id==='tinp'){saveRTime();return;}
+  if(t.id==='settingsTinp'){S.rtime=t.value;sv();if(S.ron)schedNotif();renderAyarlar();toast('Saat kaydedildi ✓');return;}
   if(t.dataset.hcur!==undefined){S.habits[parseInt(t.dataset.hcur)].current=Math.min(Math.max(0,parseInt(t.value)||0),S.habits[parseInt(t.dataset.hcur)].target);sv();renderHedef();return;}
   if(t.dataset.htgt!==undefined){S.habits[parseInt(t.dataset.htgt)].target=Math.max(1,parseInt(t.value)||1);sv();renderHedef();return;}
 });
@@ -1459,6 +1775,88 @@ document.addEventListener('keydown',function(e){
   }
   if(e.key==='Escape'){document.getElementById('emodal').classList.remove('open');document.getElementById('calDetail').classList.remove('open');}
 });
+
+
+/* ── Privacy Modal ── */
+function openPrivacy(){
+  const m=document.getElementById('privacyModal');
+  const s=document.getElementById('privacySheet');
+  m.style.opacity='1';m.style.pointerEvents='all';
+  setTimeout(()=>s.style.transform='translateY(0)',10);
+}
+function closePrivacy(){
+  const m=document.getElementById('privacyModal');
+  const s=document.getElementById('privacySheet');
+  s.style.transform='translateY(100%)';
+  setTimeout(()=>{m.style.opacity='0';m.style.pointerEvents='none';},350);
+}
+
+/* ════ AYARLAR RENDER ════ */
+function renderAyarlar(){
+  // Update name sub
+  const ns=document.getElementById('settingsNameSub');
+  if(ns)ns.textContent=S.userName||'Ayarlamak için tıkla';
+  // Update notif
+  const ntog=document.getElementById('settingsNtog');
+  if(ntog)ntog.className='toggle'+(S.ron?' on':'');
+  const nsub=document.getElementById('settingsNotifSub');
+  if(nsub)nsub.textContent=S.ron?'Açık — '+S.rtime:'Kapalı';
+  const tsub=document.getElementById('settingsTimeSub');
+  if(tsub)tsub.textContent=S.rtime;
+  const tinp=document.getElementById('settingsTinp');
+  if(tinp)tinp.value=S.rtime;
+  // Make all rv elements visible immediately
+  document.querySelectorAll('#page-ayarlar .rv').forEach(el=>el.classList.add('vis'));
+}
+
+/* ════ MODAL HELPERS ════ */
+function openModal(id){
+  const m=document.getElementById(id);
+  const s=document.getElementById(id.replace('Modal','Sheet'));
+  if(!m)return;
+  m.style.opacity='1';m.style.pointerEvents='all';
+  if(s)setTimeout(()=>s.style.transform='translateY(0)',10);
+}
+function closeModal(id){
+  const m=document.getElementById(id);
+  const s=document.getElementById(id.replace('Modal','Sheet'));
+  if(s)s.style.transform='translateY(100%)';
+  setTimeout(()=>{if(m){m.style.opacity='0';m.style.pointerEvents='none';}},350);
+}
+function openPrivacy(){openModal('privacyModal');}
+function closePrivacy(){closeModal('privacyModal');}
+function openTerms(){openModal('termsModal');}
+function closeTerms(){closeModal('termsModal');}
+
+/* ════ DELETE ALL DATA ════ */
+function showDeleteConfirm(){
+  document.getElementById('confirmDelete').classList.add('show');
+}
+function hideDeleteConfirm(){
+  document.getElementById('confirmDelete').classList.remove('show');
+}
+function deleteAllData(){
+  try{localStorage.removeItem('aspira_v5');}catch(e){}
+  hideDeleteConfirm();
+  // Reload fresh
+  setTimeout(()=>window.location.reload(),400);
+}
+
+/* ════ PREMIUM ════ */
+function handlePremium(){
+  // Placeholder — will connect to Google Play Billing / StoreKit
+  toast('🚀 Yakında! Ödeme sistemi entegre edilecek.');
+}
+
+/* ════ PLAN SELECTION ════ */
+let selectedPlan='yearly';
+function selectPlan(plan){
+  selectedPlan=plan;
+  document.querySelectorAll('.plan-card').forEach(c=>{
+    c.style.borderColor=c.dataset.plan===plan?'rgba(200,80,255,.6)':'rgba(255,255,255,.12)';
+    c.style.background=c.dataset.plan===plan?'rgba(200,80,255,.22)':'rgba(255,255,255,.08)';
+  });
+}
 
 /* ══ INIT ══ */
 renderQuote();renderTasks();renderXPBar();renderGreeting();
